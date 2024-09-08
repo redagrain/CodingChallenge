@@ -1,86 +1,33 @@
 <template>
-  <div class="item">
-    <i>
-      <slot name="icon"></slot>
-    </i>
-    <div class="details">
-      <h3>
-        <slot name="heading"></slot>
-      </h3>
-      <slot></slot>
+  <div style="border: 1px solid; margin: 5px" class="product">
+    <img style="width:100px" v-if="product.image" :src="imageURL" :alt="product.name">
+    <div class="content">
+      <h2>{{ product.name }}</h2>
+      <h3>${{ product.price }}</h3>
+      <p>{{ product.description }}</p>
+      <span>#{{ product.category }}</span>
     </div>
   </div>
 </template>
 
-<style scoped>
-.item {
-  margin-top: 2rem;
-  display: flex;
-  position: relative;
-}
+<script setup>
+import {computed} from 'vue'
 
-.details {
-  flex: 1;
-  margin-left: 1rem;
-}
-
-i {
-  display: flex;
-  place-items: center;
-  place-content: center;
-  width: 32px;
-  height: 32px;
-  color: var(--color-text);
-}
-
-h3 {
-  font-size: 1.2rem;
-  font-weight: 500;
-  margin-bottom: 0.4rem;
-  color: var(--color-heading);
-}
-
-@media (min-width: 1024px) {
-  .item {
-    margin-top: 0;
-    padding: 0.4rem 0 1rem calc(var(--section-gap) / 2);
+const props = defineProps({
+  product : {
+    type: Object,
+    required: true,
+    default: () => ({
+        name : "",
+        price : null,
+        description : "",
+        category : "",
+        image: ""
+    })
   }
+})
 
-  i {
-    top: calc(50% - 25px);
-    left: -26px;
-    position: absolute;
-    border: 1px solid var(--color-border);
-    background: var(--color-background);
-    border-radius: 8px;
-    width: 50px;
-    height: 50px;
-  }
-
-  .item:before {
-    content: ' ';
-    border-left: 1px solid var(--color-border);
-    position: absolute;
-    left: 0;
-    bottom: calc(50% + 25px);
-    height: calc(50% - 25px);
-  }
-
-  .item:after {
-    content: ' ';
-    border-left: 1px solid var(--color-border);
-    position: absolute;
-    left: 0;
-    top: calc(50% + 25px);
-    height: calc(50% - 25px);
-  }
-
-  .item:first-of-type:before {
-    display: none;
-  }
-
-  .item:last-of-type:after {
-    display: none;
-  }
-}
-</style>
+const imageURL = computed(() => {
+  return `http://127.0.0.1:8000/storage` + props.product.image
+}) 
+</script>

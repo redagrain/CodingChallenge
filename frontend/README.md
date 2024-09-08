@@ -21,3 +21,11 @@ npm run dev
 ```sh
 npm run build
 ```
+
+### Installed packages
+
+- axios
+
+```sh
+npm install axios
+```
