@@ -24,7 +24,6 @@ php artisan make:model Product
 php artisan make:model ParentCategory
 
 php artisan make:model Category
-
 ```
 
 ### Commands to create controllers
@@ -33,5 +32,12 @@ php artisan make:model Category
 php artisan make:controller ProductController
 
 php artisan make:controller CategoryController
+```
 
+### Commands to create seeders
+
+```bash
+php artisan make:seeder CategorySeeder    
+
+php artisan make:seeder ParentCategorySeeder
 ```

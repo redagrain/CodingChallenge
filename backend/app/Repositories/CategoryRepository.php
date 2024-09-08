@@ -1,12 +1,13 @@
 <?php
+namespace App\Repositories;
 
-use App\Models\ParentCategory;
-use BaseRepository;
+use App\Models\Category;
+use App\Repositories\BaseRepository;
 
 class CategoryRepository extends BaseRepository{
 
     public function __construct(){
-        parent::__construct(new ParentCategory);
+        parent::__construct(new Category);
     }
 
 }

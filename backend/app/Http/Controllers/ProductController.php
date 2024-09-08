@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use CategoryRepository;
+use App\Repositories\ParentCategoryRepository;
+use App\Repositories\ProductRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
-use ProductRepository;
 
 class ProductController extends Controller
 {
     protected $productRepository;
-    protected $categoriesRepository;
+    protected $parentCategoryRepository;
 
     public function __construct(){
         $this->productRepository = new ProductRepository();
-        $this->categoriesRepository = new CategoryRepository();
+        $this->parentCategoryRepository = new ParentCategoryRepository();
     }
 
 
@@ -30,7 +30,7 @@ class ProductController extends Controller
 
     public function create(){
         try {
-            $categories = $this->categoriesRepository->getAllWithRelations(['categories']);
+            $categories = $this->parentCategoryRepository->getAllWithRelations(['categories']);
             return response()->json($categories, 200);
         } catch (\Exception $e) {
             Log::error($e->getMessage());

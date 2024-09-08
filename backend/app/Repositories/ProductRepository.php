@@ -1,7 +1,8 @@
 <?php
+namespace App\Repositories;
 
 use App\Models\Product;
-use BaseRepository;
+use App\Repositories\BaseRepository;
 
 
 
