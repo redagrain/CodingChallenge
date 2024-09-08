@@ -6,12 +6,12 @@ use App\Models\ParentCategory;
 
 class ParentCategoryRepository
 {
-    public function getAllWithRelations($relations = [])
+    public function getAllWithRelations(array $relations = [])
     {
         return ParentCategory::with($relations)->get();
     }
 
-    public function create($data = [])
+    public function create(array $data = [])
     {
         return ParentCategory::create($data);
     }
