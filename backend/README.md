@@ -41,3 +41,11 @@ php artisan make:seeder CategorySeeder
 
 php artisan make:seeder ParentCategorySeeder
 ```
+
+### Commands to create unite tests
+
+```bash
+php artisan make:test ProductTest    
+
+php artisan test
+```
