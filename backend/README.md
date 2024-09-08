@@ -50,14 +50,10 @@ php artisan make:test ProductTest
 php artisan test
 ```
 
-### Commands to create custom artisan command
+### Command to create a product from CLI
 
 ```bash
 php artisan make:command CreateProductCommand  
-```
 
-Commande to create a product from CLI
-
-```bash
 php artisan create:product 
 ```
