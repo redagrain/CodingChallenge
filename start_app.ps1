@@ -1,5 +1,4 @@
 # Install Laravel
-
 Write-Host "Navigating to backend directory..."
 Set-Location -Path "./backend"
 
