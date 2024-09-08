@@ -7,11 +7,11 @@ use App\Models\Product;
 
 class ProductRepository
 {
-    public function getAllWithRelations(array $relations = [])
+    public function getAllWithRelations( $relations = [])
     {
         return Product::with($relations)->get();
     }
-    public function create(array $data = [])
+    public function create( $data = [])
     {
         return Product::create($data)->categories()->sync($data['category_id']);
     }

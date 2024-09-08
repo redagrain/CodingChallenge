@@ -6,7 +6,7 @@ use App\Models\Category;
 
 class CategoryRepository
 {
-    public function create(array $data = [])
+    public function create($data = [])
     {
         return Category::create($data);
     }

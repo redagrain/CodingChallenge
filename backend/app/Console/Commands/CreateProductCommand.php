@@ -26,12 +26,12 @@ class CreateProductCommand extends Command
     protected $productRepository;
     protected $parentCategoriesRepository;
 
-    public function __construct()
+    public function __construct(ProductRepository $productRepository, ParentCategoryRepository $parentCategoryRepository)
     {
         parent::__construct();
     
-        $this->productRepository = new ProductRepository();
-        $this->parentCategoriesRepository = new ParentCategoryRepository();
+        $this->productRepository = $productRepository;
+        $this->parentCategoriesRepository = $parentCategoryRepository;
     }
 
     /**
