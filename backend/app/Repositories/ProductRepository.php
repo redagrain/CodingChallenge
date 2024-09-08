@@ -12,4 +12,7 @@ class ProductRepository extends BaseRepository{
         parent::__construct(new Product);
     }
 
+    public function create($data = []){
+        return parent::create($data)->categories()->sync($data['category_id']);
+    }
 }

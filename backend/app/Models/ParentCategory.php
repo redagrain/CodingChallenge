@@ -10,6 +10,6 @@ class ParentCategory extends Model
     use HasFactory;
 
     public function categories(){
-        return $this->hasMany(Category::class);
+        return $this->hasMany(Category::class, 'parent_category');
     }
 }

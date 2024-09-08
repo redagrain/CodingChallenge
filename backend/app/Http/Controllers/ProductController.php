@@ -20,7 +20,7 @@ class ProductController extends Controller
 
     public function index(){
         try {
-            $products = $this->productRepository->getAllWithRelations(['categories']);
+            $products = $this->productRepository->getAllWithRelations(['categories.parentCategories']);
             return response()->json($products, 200);
         } catch (\Exception $e) {
             Log::error($e->getMessage());
