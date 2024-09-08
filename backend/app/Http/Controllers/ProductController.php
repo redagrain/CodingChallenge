@@ -26,6 +26,7 @@ class ProductController extends Controller
             return response()->json($products, 200);
         } catch (\Exception $e) {
             Log::error($e->getMessage());
+            return response()->json(['error' => 'Failed to fetch products'], 500);
         }
     }
 
@@ -37,6 +38,7 @@ class ProductController extends Controller
             return response()->json($categories, 200);
         } catch (\Exception $e) {
             Log::error($e->getMessage());
+            return response()->json(['error' => 'Failed to fetch categories'], 500);
         }
     }
 
@@ -52,6 +54,7 @@ class ProductController extends Controller
             return response()->json(['message' => 'Product Created Successfully'], 200);
         } catch (\Exception $e) {
             Log::error($e->getMessage());
+            return response()->json(['error' => 'Failed to create product'], 500);
         }
     }
 }
