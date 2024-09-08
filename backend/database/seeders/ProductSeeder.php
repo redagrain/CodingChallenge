@@ -12,9 +12,10 @@ class ProductSeeder extends Seeder
      * Run the database seeds.
      */
 
-     protected $productRepository;
- 
-     public function __construct(){
+    protected $productRepository;
+
+    public function __construct()
+    {
         $this->productRepository = new ProductRepository();
     }
     public function run(): void
@@ -25,9 +26,9 @@ class ProductSeeder extends Seeder
             ['name' => 'Men\'s T-shirt', 'price' => 12.99, 'description' => '100% cotton T-shirt, available in multiple colors', 'category_id' => 5],
             ['name' => 'Men\'s Jeans', 'price' => 39.99, 'description' => 'Slim-fit denim jeans with stretch fabric', 'category_id' => 6],
         ];
-        
+
         foreach ($products as $product) {
             $this->productRepository->create($product);
-        }        
+        }
     }
 }

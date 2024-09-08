@@ -12,13 +12,15 @@ class ProductController extends Controller
     protected $productRepository;
     protected $parentCategoryRepository;
 
-    public function __construct(ProductRepository $productRepository, ParentCategoryRepository $parentCategoryRepository){
+    public function __construct(ProductRepository $productRepository, ParentCategoryRepository $parentCategoryRepository)
+    {
         $this->productRepository = $productRepository;
         $this->parentCategoryRepository = $parentCategoryRepository;
     }
 
 
-    public function index(){
+    public function index()
+    {
         try {
             $products = $this->productRepository->getAllWithRelations(['categories.parentCategories']);
             return response()->json($products, 200);
@@ -28,7 +30,8 @@ class ProductController extends Controller
     }
 
 
-    public function create(){
+    public function create()
+    {
         try {
             $categories = $this->parentCategoryRepository->getAllWithRelations(['categories']);
             return response()->json($categories, 200);
@@ -37,10 +40,11 @@ class ProductController extends Controller
         }
     }
 
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         $data = $request->all();
         try {
-            if($request->hasFile('image')){
+            if ($request->hasFile('image')) {
                 $imagePath = $request->file('image')->store('images/products', 'public');
                 $data['image'] = $imagePath;
             }

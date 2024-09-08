@@ -12,9 +12,10 @@ class CategorySeeder extends Seeder
      * Run the database seeds.
      */
 
-     protected $categoriesRepository;
- 
-     public function __construct(){
+    protected $categoriesRepository;
+
+    public function __construct()
+    {
         $this->categoriesRepository = new CategoryRepository();
     }
     public function run(): void
@@ -27,9 +28,9 @@ class CategorySeeder extends Seeder
             ['name' => 'Jackets', 'parent_category' => 2],
             ['name' => 'Trousers', 'parent_category' => 2],
         ];
-        
+
         foreach ($categories as $category) {
             $this->categoriesRepository->create($category);
-        }        
+        }
     }
 }

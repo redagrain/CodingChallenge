@@ -9,7 +9,8 @@ class ParentCategory extends Model
 {
     use HasFactory;
 
-    public function categories(){
+    public function categories()
+    {
         return $this->hasMany(Category::class, 'parent_category');
     }
 }

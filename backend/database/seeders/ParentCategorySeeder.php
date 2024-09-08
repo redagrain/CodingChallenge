@@ -25,7 +25,7 @@ class ParentCategorySeeder extends Seeder
             ['name' => 'Books'],
             ['name' => 'Clothing'],
         ];
-        
+
         foreach ($parentCategories as $parentCategory) {
             $this->parentCategoriesRepository->create($parentCategory);
         }
