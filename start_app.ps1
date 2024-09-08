@@ -19,7 +19,7 @@ php artisan migrate --seed
 
 # Start Laravel backend server
 Write-Host "Starting Laravel backend server..."
-php artisan serve
+Start-Process php -ArgumentList "artisan serve" -NoNewWindow
 
 Write-Host "Make sure the backend server is running on: http://127.0.0.1:8000"
 
