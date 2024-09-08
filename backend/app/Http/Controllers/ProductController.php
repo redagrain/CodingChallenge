@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProductRequest;
 use App\Repositories\ParentCategoryRepository;
 use App\Repositories\ProductRepository;
 use App\Services\ProductyCategoryService;
@@ -45,12 +46,12 @@ class ProductController extends Controller
         }
     }
 
-    public function store(Request $request)
+    public function store(ProductRequest $productRequest)
     {
-        $data = $request->all();
         try {
-            if ($request->hasFile('image')) {
-                $imagePath = $request->file('image')->store('images/products', 'public');
+            $data = $productRequest->validated();
+            if ($productRequest->hasFile('image')) {
+                $imagePath = $productRequest->file('image')->store('images/products', 'public');
                 $data['image'] = $imagePath;
             }
             $product = $this->productRepository->create($data);
