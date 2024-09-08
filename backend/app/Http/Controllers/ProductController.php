@@ -38,8 +38,12 @@ class ProductController extends Controller
     }
 
     public function store(Request $request){
+        $data = $request->all();
         try {
-            $data = $request->all();
+            if($request->hasFile('image')){
+                $imagePath = $request->file('image')->store('images/products', 'public');
+                $data['image'] = $imagePath;
+            }
             $this->productRepository->create($data);
             return response()->json(['message' => 'Product Created Successfully'], 200);
         } catch (\Exception $e) {

@@ -57,3 +57,9 @@ php artisan make:command CreateProductCommand
 
 php artisan create:product 
 ```
+
+### Create symbolink between public/storage and storage/app/public  
+
+```bash
+php artisan storage:link
+```

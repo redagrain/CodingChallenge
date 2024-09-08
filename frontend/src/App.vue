@@ -6,8 +6,8 @@ import { RouterLink, RouterView } from 'vue-router'
   <header>
     <div>
       <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/AddProduct">Add Product</RouterLink>
+        <RouterLink style="margin: 3px" to="/">Home</RouterLink>
+        <RouterLink style="margin: 3px" to="/AddProduct">Add Product</RouterLink>
       </nav>
     </div>
   </header>

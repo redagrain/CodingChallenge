@@ -28,6 +28,6 @@ const props = defineProps({
 })
 
 const imageURL = computed(() => {
-  return `http://127.0.0.1:8000/storage` + props.product.image
+  return `http://127.0.0.1:8000/storage/` + props.product.image
 }) 
 </script>
