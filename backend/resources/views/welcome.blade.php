@@ -1,0 +1,1 @@
+<h1>This server works as an API for the client side</h1>
