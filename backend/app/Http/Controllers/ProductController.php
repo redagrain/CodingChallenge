@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Repositories\ParentCategoryRepository;
 use App\Repositories\ProductRepository;
+use App\Services\ProductyCategoryService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
@@ -11,11 +12,13 @@ class ProductController extends Controller
 {
     protected $productRepository;
     protected $parentCategoryRepository;
+    protected $productyCategoryService;
 
-    public function __construct(ProductRepository $productRepository, ParentCategoryRepository $parentCategoryRepository)
+    public function __construct(ProductRepository $productRepository, ParentCategoryRepository $parentCategoryRepository, ProductyCategoryService $productyCategoryService)
     {
         $this->productRepository = $productRepository;
         $this->parentCategoryRepository = $parentCategoryRepository;
+        $this->productyCategoryService = $productyCategoryService;
     }
 
 
@@ -50,7 +53,8 @@ class ProductController extends Controller
                 $imagePath = $request->file('image')->store('images/products', 'public');
                 $data['image'] = $imagePath;
             }
-            $this->productRepository->create($data);
+            $product = $this->productRepository->create($data);
+            $this->productyCategoryService->syncProductCategories($product->id, $data['category_id']);
             return response()->json(['message' => 'Product Created Successfully'], 200);
         } catch (\Exception $e) {
             Log::error($e->getMessage());
