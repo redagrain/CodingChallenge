@@ -4,6 +4,18 @@
   import { onMounted, ref } from 'vue';
 
   const products = ref([])
+  const displayedProducts = ref(products)
+  const sortBy = ref('asc')
+
+
+  // function sorts Products
+  const sortProducts = () => {
+    if (sortBy.value === 'asc') {
+      displayedProducts.value = products.value.sort((a,b)=> a.price - b.price)
+    }else{
+      displayedProducts.value.sort((a,b)=> b.price - a.price)
+    }
+  }
 
   const fetchProducts = async () => {
     try {
@@ -22,7 +34,18 @@
 </script>
 
 <template>
-  <div class="products">
-    <ProductCard v-for="product in products" :product="product" :key="product.id"/>
+  <div>
+    <div class="header">
+      <div class="sort">
+        <label for="">sort by price:</label>
+        <select v-model="sortBy" @change="sortProducts">
+          <option value="asc">ASC</option>
+          <option value="desc">DESC</option>
+        </select>
+      </div>
+    </div>
+    <div class="products">
+      <ProductCard v-for="product in displayedProducts" :product="product" :key="product.id"/>
+    </div>
   </div>
 </template>
