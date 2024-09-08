@@ -26,3 +26,12 @@ php artisan make:model ParentCategory
 php artisan make:model Category
 
 ```
+
+### Commands to create controllers
+
+```bash
+php artisan make:controller ProductController
+
+php artisan make:controller CategoryController
+
+```
