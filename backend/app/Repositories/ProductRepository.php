@@ -4,18 +4,15 @@ namespace App\Repositories;
 
 use App\Models\Product;
 
-use App\Repositories\BaseRepository;
 
-class ProductRepository extends BaseRepository
+class ProductRepository
 {
-
-    public function __construct()
+    public function getAllWithRelations(array $relations = [])
     {
-        parent::__construct(new Product);
+        return Product::with($relations)->get();
     }
-
     public function create(array $data = [])
     {
-        return parent::create($data)->categories()->sync($data['category_id']);
+        return Product::create($data)->categories()->sync($data['category_id']);
     }
 }

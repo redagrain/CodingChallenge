@@ -3,13 +3,11 @@
 namespace App\Repositories;
 
 use App\Models\Category;
-use App\Repositories\BaseRepository;
 
-class CategoryRepository extends BaseRepository
+class CategoryRepository
 {
-
-    public function __construct()
+    public function create(array $data = [])
     {
-        parent::__construct(new Category);
+        return Category::create($data);
     }
 }

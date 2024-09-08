@@ -3,13 +3,16 @@
 namespace App\Repositories;
 
 use App\Models\ParentCategory;
-use App\Repositories\BaseRepository;
 
-class ParentCategoryRepository extends BaseRepository
+class ParentCategoryRepository
 {
-
-    public function __construct()
+    public function getAllWithRelations(array $relations = [])
     {
-        parent::__construct(new ParentCategory);
+        return ParentCategory::with($relations)->get();
+    }
+
+    public function create(array $data = [])
+    {
+        return ParentCategory::create($data);
     }
 }
