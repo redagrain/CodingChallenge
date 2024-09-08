@@ -12,9 +12,9 @@ class ProductController extends Controller
     protected $productRepository;
     protected $parentCategoryRepository;
 
-    public function __construct(){
-        $this->productRepository = new ProductRepository();
-        $this->parentCategoryRepository = new ParentCategoryRepository();
+    public function __construct(ProductRepository $productRepository, ParentCategoryRepository $parentCategoryRepository){
+        $this->productRepository = $productRepository;
+        $this->parentCategoryRepository = $parentCategoryRepository;
     }
 
 
