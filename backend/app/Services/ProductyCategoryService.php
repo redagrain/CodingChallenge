@@ -16,7 +16,7 @@ class ProductyCategoryService
         $this->categoryRepository = $categoryRepository;
     }
 
-    public function syncProductCategories(int $productId, int $categoryId)
+    public function syncProductCategories(int $productId, int $categoryId): void
     {
         $product = $this->productRepository->find($productId);
         if ($product) {

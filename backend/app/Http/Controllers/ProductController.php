@@ -6,6 +6,7 @@ use App\Http\Requests\ProductRequest;
 use App\Repositories\CategoryRepository;
 use App\Repositories\ProductRepository;
 use App\Services\ProductyCategoryService;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
@@ -23,7 +24,7 @@ class ProductController extends Controller
     }
 
 
-    public function index()
+    public function index(): JsonResponse
     {
         try {
             $products = $this->productRepository->getAllWithRelations(['categories']);
@@ -35,7 +36,7 @@ class ProductController extends Controller
     }
 
 
-    public function create()
+    public function create(): JsonResponse
     {
         try {
             $categories = $this->categoryRepository->getAll();
@@ -46,7 +47,7 @@ class ProductController extends Controller
         }
     }
 
-    public function store(ProductRequest $productRequest)
+    public function store(ProductRequest $productRequest): JsonResponse
     {
         try {
             $data = $productRequest->validated();
