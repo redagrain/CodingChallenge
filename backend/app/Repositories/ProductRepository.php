@@ -11,9 +11,9 @@ class ProductRepository
     {
         return Product::find($id);
     }
-    public function getAllWithRelations(array $relations = []): Collection
+    public function getAllWithRelations(): Collection
     {
-        return Product::with($relations)->get();
+        return Product::with('categories')->get();
     }
     public function create(array $data = []): Product
     {

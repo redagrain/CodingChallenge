@@ -27,7 +27,7 @@ class ProductController extends Controller
     public function index(): JsonResponse
     {
         try {
-            $products = $this->productRepository->getAllWithRelations(['categories']);
+            $products = $this->productRepository->getAllWithRelations();
             return response()->json($products, 200);
         } catch (\Exception $e) {
             Log::error($e->getMessage());
