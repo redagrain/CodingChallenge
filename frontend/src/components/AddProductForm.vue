@@ -14,15 +14,9 @@
                 <input type="text" v-model="formData.price" placeholder="price"/>
             </div>
             <div class="input">
-                <select @change="onCategoryChange" v-model="parentCategory">
+                <select @change="onCategoryChange" v-model="formData.category_id">
                     <option :value="null">Select a Category</option>
-                    <option v-for="parentCategory in parentCategories" :value="parentCategory.id" :key="parentCategory.id">{{ parentCategory.name }}</option>
-                </select>
-            </div>
-            <div v-if="parentCategory" class="input">
-                <select v-model="formData.category_id" id="category">
-                    <option :value="null">Select subcategory</option>
-                    <option :key="category.id" v-for="category in subCategories" :value="category.id">{{ category.name }}</option>
+                    <option v-for="parentCategory in categories" :value="parentCategory.id" :key="parentCategory.id">{{ parentCategory.name }}</option>
                 </select>
             </div>
             <button>submite</button>
@@ -36,7 +30,7 @@
     import axios from 'axios';
     import {onMounted, ref, computed} from 'vue'
     
-    const parentCategories = ref({})
+    const categories = ref({})
     const successMessage = ref('')
     const errorMessage = ref('')
     const subCategories = ref({})
@@ -50,11 +44,10 @@
     })
 
     // fetch categories
-    const fetchParentCategories = async () => {
+    const fetchcategories = async () => {
         try {
             const res = await axios.get('http://127.0.0.1:8000/api/create')
-            parentCategories.value = res.data;
-            console.log(parentCategories.value);
+            categories.value = res.data.filter((category)=> category.parent_id)
         } catch (err) {
             console.error(err)
         }
@@ -63,7 +56,7 @@
     // get subcategories
     const onCategoryChange = () => {
         const subCategoriesData = computed(() => {
-            const selectedParentCategory = parentCategories.value.find((category) => {
+            const selectedParentCategory = categories.value.find((category) => {
                 return category.id === parentCategory.value;
             });
 
@@ -93,7 +86,7 @@
     }
 
     onMounted(()=>{
-        fetchParentCategories()
+        fetchcategories()
     })
 
 </script>

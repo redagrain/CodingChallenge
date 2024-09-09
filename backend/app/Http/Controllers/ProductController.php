@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProductRequest;
-use App\Repositories\ParentCategoryRepository;
+use App\Repositories\CategoryRepository;
 use App\Repositories\ProductRepository;
 use App\Services\ProductyCategoryService;
 use Illuminate\Http\Request;
@@ -12,13 +12,13 @@ use Illuminate\Support\Facades\Log;
 class ProductController extends Controller
 {
     protected $productRepository;
-    protected $parentCategoryRepository;
+    protected $categoryRepository;
     protected $productyCategoryService;
 
-    public function __construct(ProductRepository $productRepository, ParentCategoryRepository $parentCategoryRepository, ProductyCategoryService $productyCategoryService)
+    public function __construct(ProductRepository $productRepository, CategoryRepository $categoryRepository, ProductyCategoryService $productyCategoryService)
     {
         $this->productRepository = $productRepository;
-        $this->parentCategoryRepository = $parentCategoryRepository;
+        $this->categoryRepository = $categoryRepository;
         $this->productyCategoryService = $productyCategoryService;
     }
 
@@ -26,7 +26,7 @@ class ProductController extends Controller
     public function index()
     {
         try {
-            $products = $this->productRepository->getAllWithRelations(['categories.parentCategories']);
+            $products = $this->productRepository->getAllWithRelations(['categories']);
             return response()->json($products, 200);
         } catch (\Exception $e) {
             Log::error($e->getMessage());
@@ -38,7 +38,7 @@ class ProductController extends Controller
     public function create()
     {
         try {
-            $categories = $this->parentCategoryRepository->getAllWithRelations(['categories']);
+            $categories = $this->categoryRepository->getAll();
             return response()->json($categories, 200);
         } catch (\Exception $e) {
             Log::error($e->getMessage());

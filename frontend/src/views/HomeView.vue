@@ -24,7 +24,7 @@
   // function filters Products
   const filterProducts = () => {
     if (filterBy.value !== 'default') {
-      displayedProducts.value = products.value.filter((product) => product.categories[0].parent_categories.name === filterBy.value)
+      displayedProducts.value = products.value.filter((product) => product.categories[0].name === filterBy.value)
     }else{
       displayedProducts.value = products.value
     }
@@ -44,7 +44,9 @@
   const fetchCategories = async () => {
     try {
       const res = await axios.get('http://127.0.0.1:8000/api/create')
-      categories.value = res.data
+      
+      
+      categories.value = res.data.filter((category)=> category.parent_id)
     } catch (err) {
       console.error(err);
     }

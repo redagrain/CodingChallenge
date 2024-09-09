@@ -5,7 +5,7 @@
       <h2>{{ product.name }}</h2>
       <h3>${{ product.price }}</h3>
       <p>{{ product.description }}</p>
-      <span>#{{ product.categories[0].parent_categories.name }}</span>
+      <span>#{{ product.categories[0].name }}</span>
       <!-- <span>#{{ product.categories }}</span> -->
     </div>
   </div>

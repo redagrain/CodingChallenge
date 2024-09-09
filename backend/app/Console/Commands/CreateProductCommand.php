@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\Repositories\ParentCategoryRepository;
+use App\Repositories\CategoryRepository;
 use App\Repositories\ProductRepository;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
@@ -26,14 +26,14 @@ class CreateProductCommand extends Command
     protected $description = 'Command to create a product from CLI';
 
     protected $productRepository;
-    protected $parentCategoriesRepository;
+    protected $CategoryRepository;
 
-    public function __construct(ProductRepository $productRepository, ParentCategoryRepository $parentCategoryRepository)
+    public function __construct(ProductRepository $productRepository, CategoryRepository $categoryRepository)
     {
         parent::__construct();
 
         $this->productRepository = $productRepository;
-        $this->parentCategoriesRepository = $parentCategoryRepository;
+        $this->CategoryRepository = $categoryRepository;
     }
 
     /**
@@ -51,27 +51,19 @@ class CreateProductCommand extends Command
 
             if (!file_exists($data['image'])) {
                 $this->error('File does not exist at the specified path.');
-                return 1;
             }
 
             // Get parent categories
-            $fetchParentCategories = $this->parentCategoriesRepository->getAllWithRelations(['categories']);
+            $fetchCategories = $this->CategoryRepository->getSubcategories();
 
             //convert them to array with only name and id colomuns
-            $parentCategories = $fetchParentCategories->pluck('name', 'id')->toArray();
+            $Categories = $fetchCategories->pluck('name', 'id')->toArray();
 
             // prompt a selection of Categories to user
-            $parentCategory = $this->choice('Select a Categroy', array_values($parentCategories));
-
-            // get selected category and convert its subcategories to name and id colomuns only
-            $getSubCategories = collect($fetchParentCategories)->firstWhere('name', $parentCategory);
-            $subCategories = $getSubCategories->categories->pluck('name', 'id')->toArray();
-
-            // prompt a selection of subCategories to user
-            $subCategory = $this->choice('Select a Categroy', array_values($subCategories));
+            $selectedCategory = $this->choice('Select a Categroy', array_values($Categories));
 
             // get id of selected sub category
-            $data['category_id'] = array_search($subCategory, $subCategories);
+            $data['category_id'] = array_search($selectedCategory, $Categories);
 
             $validateData = Validator::make($data, [
                 'name' => ['required', 'min:3', 'max:25'],

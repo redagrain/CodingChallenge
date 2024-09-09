@@ -21,12 +21,12 @@ class CategorySeeder extends Seeder
     public function run(): void
     {
         $categories = [
-            ['name' => 'History', 'parent_category' => 1],
-            ['name' => 'Biography', 'parent_category' => 1],
-            ['name' => 'Science', 'parent_category' => 1],
-            ['name' => 'Shirts', 'parent_category' => 2],
-            ['name' => 'Jackets', 'parent_category' => 2],
-            ['name' => 'Trousers', 'parent_category' => 2],
+            ['name' => 'Books'],
+            ['name' => 'Clothing'],
+            ['name' => 'History', 'parent_id' => 1],
+            ['name' => 'Biography', 'parent_id' => 1],
+            ['name' => 'Jackets', 'parent_id' => 2],
+            ['name' => 'Trousers', 'parent_id' => 2],
         ];
 
         foreach ($categories as $category) {
