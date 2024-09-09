@@ -20,7 +20,7 @@ class ProductyCategoryService
     {
         $product = $this->productRepository->find($productId);
         if ($product) {
-            $product->categories()->sync([$categoryId]);
+            $this->categoryRepository->syncProductCategories($product, $categoryId);
         }
     }
 }
